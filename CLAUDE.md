@@ -11,8 +11,6 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Commands
 
-> This project has not been scaffolded yet. Once initialized, expect the following conventions:
-
 ```bash
 npm run dev        # start local dev server
 npm run build      # production build
@@ -20,11 +18,11 @@ npm run lint       # eslint
 npm run typecheck  # tsc --noEmit
 ```
 
-Supabase local development:
+Supabase:
 ```bash
-npx supabase start          # start local Supabase instance
-npx supabase db reset       # reset DB and re-run migrations + seed
-npx supabase gen types typescript --local > lib/database.types.ts  # regenerate types after schema changes
+supabase link --project-ref <ref>   # link to remote project
+supabase db push                    # push migrations to remote
+supabase migration list             # check migration status
 ```
 
 ## Architecture
@@ -45,10 +43,15 @@ The single league progresses through explicit states: `registration_open` → `t
 - **Draws** — weekly rounds where all teams play simultaneously. Schedule is generated upfront (round-robin), with byes spread evenly when team count doesn't divide evenly across sheets.
 - **Results** — entered by teams on the honor system (winner only); drawmaster can override. Standings (W/L/Draw) auto-update.
 
-### Route Structure (planned)
+### Route Structure
 
 - `/` — public landing / login
 - `/register` — user account creation (name, email, phone, skill tier)
 - `/league/join` — league registration (confirm join + teammate preferences)
 - `/portal` — player portal: upcoming schedule, teammates/contacts, standings
 - `/admin` — drawmaster/admin tools: player pool, team balancing, schedule editor, results override, role management
+
+### Pure Function Modules
+
+- `lib/balancing/generateTeamDraft.ts` — team balancing algorithm (tested)
+- `lib/schedule/generateSchedule.ts` — round-robin schedule generator (tested)
