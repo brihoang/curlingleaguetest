@@ -6,3 +6,5 @@ export type SeasonState = Database['public']['Enums']['season_state']
 
 export type Profile = Database['public']['Tables']['profiles']['Row']
 export type Season = Database['public']['Tables']['seasons']['Row']
+export type LeagueRegistration = Database['public']['Tables']['league_registrations']['Row']
+export type TeammatePreference = Database['public']['Tables']['teammate_preferences']['Row']
