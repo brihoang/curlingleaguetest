@@ -1,6 +1,6 @@
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
-import type { UserRole } from '@/lib/supabase/types'
+import type { UserRole } from "@/lib/supabase/types"
 
 const DRAWMASTER_ROLES: UserRole[] = ['drawmaster', 'club_admin']
 
