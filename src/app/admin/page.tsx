@@ -42,6 +42,12 @@ export default async function AdminPage() {
       <h1 className="mb-8 text-3xl font-bold">Admin Dashboard</h1>
       <div className="flex flex-col gap-8">
         <SeasonStatePanel season={season} />
+        <a
+          href="/admin/directory"
+          className="inline-flex items-center gap-2 text-sm font-medium text-blue-600 hover:underline"
+        >
+          Player Directory →
+        </a>
         {profile.role === 'club_admin' && (
           <RoleManagementPanel users={users} currentUserId={user.id} />
         )}
