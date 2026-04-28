@@ -39,6 +39,42 @@ export type Database = {
   }
   public: {
     Tables: {
+      league_registrations: {
+        Row: {
+          created_at: string
+          id: string
+          season_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          season_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          season_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "league_registrations_season_id_fkey"
+            columns: ["season_id"]
+            isOneToOne: false
+            referencedRelation: "seasons"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "league_registrations_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           created_at: string
@@ -92,6 +128,52 @@ export type Database = {
           week_count?: number | null
         }
         Relationships: []
+      }
+      teammate_preferences: {
+        Row: {
+          created_at: string
+          from_user_id: string
+          id: string
+          preferred_user_id: string
+          season_id: string
+        }
+        Insert: {
+          created_at?: string
+          from_user_id: string
+          id?: string
+          preferred_user_id: string
+          season_id: string
+        }
+        Update: {
+          created_at?: string
+          from_user_id?: string
+          id?: string
+          preferred_user_id?: string
+          season_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "teammate_preferences_from_user_id_fkey"
+            columns: ["from_user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "teammate_preferences_preferred_user_id_fkey"
+            columns: ["preferred_user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "teammate_preferences_season_id_fkey"
+            columns: ["season_id"]
+            isOneToOne: false
+            referencedRelation: "seasons"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {
